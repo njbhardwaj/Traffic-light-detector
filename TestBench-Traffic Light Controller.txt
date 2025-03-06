@@ -1,5 +1,102 @@
 `timescale 1ns / 1ps
 module Traffic_Light_Controller_TB;
+    reg clk, rst;
+    wire [2:0] light_M1;
+    wire [2:0] light_S;
+    wire [2:0] light_MT;
+    wire [2:0] light_M2;
+    wire [3:0] count;
+    wire [2:0] ps;
+
+    // Instantiate the DUT (Device Under Test)
+    Traffic_Light_Controller dut (
+        .clk(clk),
+        .rst(rst),
+        .light_M1(light_M1),
+        .light_S(light_S),
+        .light_M2(light_M2),
+        .light_MT(light_MT)
+    );
+
+    // Clock generation
+    initial begin
+        clk = 1'b0;
+        forever #500 clk = ~clk;  // Toggle clock every 500ps (1ns period)
+    end
+
+    // Reset and simulation control
+    initial begin
+        // Enable VCD dump file generation
+        $dumpfile("dump.vcd");  // Specify the VCD file
+        $dumpvars(0, Traffic_Light_Controller_TB);  // Dump all signals
+
+        rst = 0;
+        #1000;  // Wait 1000ns
+        rst = 1;
+        #1000;  // Wait 1000ns
+        rst = 0;
+        #200000;  // Wait for 200000ns (200µs)
+
+        $finish;  // Terminate simulation
+    end
+endmodule
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+`timescale 1ns / 1ps
+module Traffic_Light_Controller_TB;
 reg clk,rst;
 wire [2:0]light_M1;
 wire [2:0]light_S;
